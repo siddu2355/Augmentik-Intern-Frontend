@@ -36,12 +36,11 @@ class ProfileForm extends Form {
             }
             catch (ex){
                 if (ex.response && ex.response.status === 400) {
-                    alert("age must be greater than or equal to 1")
+                    alert("age must be greater than or equal to 1 and must be less than 110.")
                 }
             }
         } catch {
             alert("an unexpected Error occured")
-            this.props.history.replace("/login")
         }
     }
     async componentDidMount() {
