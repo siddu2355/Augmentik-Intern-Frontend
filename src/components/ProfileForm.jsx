@@ -29,31 +29,19 @@ class ProfileForm extends Form {
                 const password = localStorage.getItem("password")
                 const response = await LoginUser({ 'email': email, 'password': password })
                 sessionStorage.setItem("jwt", response.data)
-                localStorage.removeItem("email")
-                localStorage.removeItem("password")
                 await registerProfile(this.state.data)
                 alert("Details Submitted Succesfully")
                 this.props.history.replace("/home")
                 window.location = "/home"
             }
-            catch {
-                alert("an unexpected Error occured")
-                this.props.history.replace("/login")
+            catch (ex){
+                if (ex.response && ex.response.status === 400) {
+                    alert("age must be greater than or equal to 1")
+                }
             }
-        } catch (ex) {
-            if (ex.response && ex.response.status === 400) {
-                const errors = { ...this.state.errors }
-                // errors.id = ex.response.data.id
-                // errors.github_username = ex.response.data.github_username
-                // errors.codechef_username = ex.response.data.codechef_username
-                // errors.codeforces_username = ex.response.data.codeforces_username
-                // errors.leetcode_username = ex.response.data.leetcode_username
-                // errors.linkedin_username = ex.response.data.linkedin_username
-                // errors.hackerrank_username = ex.response.data.hackerrank_username
-                // errors.user_id = ex.response.data.user_id
-                // this.setState({ errors })
-                console.log()(errors)
-            }
+        } catch {
+            alert("an unexpected Error occured")
+            this.props.history.replace("/login")
         }
     }
     async componentDidMount() {

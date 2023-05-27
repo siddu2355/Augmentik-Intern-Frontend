@@ -9,6 +9,7 @@ import RegisterScreen from "./components/RegisterScreen";
 import ProfileForm from './components/ProfileForm';
 import LogOut from './components/LogOut';
 import jwt_decode from 'jwt-decode';
+import Table from './components/Table';
 
 class App extends Component {
   state = {
@@ -21,7 +22,7 @@ class App extends Component {
     try {
       const jwt = sessionStorage.getItem("jwt");
       const user = jwt_decode(jwt);
-      localStorage.setItem("id", user.user_id);
+      localStorage.setItem("id", user._id);
       this.setState({ user });
     } catch (ex) {}
   }
@@ -37,10 +38,12 @@ class App extends Component {
         {user.user_id === -1 && (<Route path="/login" component={LoginScreen} />)}
         {user.user_id === -1 && (<Route path="/register" component={RegisterScreen} />)}
         {user.user_id === -1 && (<Redirect from='/' exact to='/home' />)}
-        {user.user_id === -1 && (<Route path="/add-profile" component={(props) => <ProfileForm user={user} email={email} {...props} />} />)}
+        <Route path="/add-profile" component={(props) => <ProfileForm user={user} email={email} {...props} />} />
         <Route path="/home" component={Home} />
+        <Route path="/details" component={Table} />
         <Route path="/not-found" component={NotFound} />
-        <Redirect to="/not-found"/>
+        <Redirect to="/not-found" />
+          
       </Switch>
     </React.Fragment>
   );

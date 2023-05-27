@@ -25,11 +25,7 @@ class RegisterScreen extends Form {
             window.location = '/add-profile'
         } catch (ex) {
             if (ex.response && ex.response.status === 400) {
-                const errors = {...this.state.errors}
-                errors.username = ex.response.data.username
-                errors.email = ex.response.data.email
-                errors.password = ex.response.data.password[0]
-                this.setState({ errors })
+                alert("Email already exists...")
             }
         }
     }
@@ -45,7 +41,7 @@ class RegisterScreen extends Form {
                         {this.renderInput("password", "Password", 'input', "password")}
                         {this.renderButton("Register")}
                     </form>
-                    <p>already a member? <a href="/login">Log In</a></p>
+                    <p style={{fontSize:"medium", marginLeft:'20rem'}}>already a member? <a href="/login">Log In</a></p>
                 </div>
             </div>
         );

@@ -19,6 +19,10 @@ class NavBar extends Component {
                             <li><div className='nav-link'><Link to="/login" ><span className="btn btn--secondary btn--large" href="/login">Get Started</span></Link></div></li>
                         </React.Fragment>
                     )}
+                    {user.user_id !== -1 && <><div style={{ flexGrow: 1 }}></div>
+                    <div style={{ flexGrow: 1 }}></div>
+                    <div style={{ flexGrow: 1 }}></div>
+                    <div style={{flexGrow:1}}></div></>}
                     {user.user_id !== -1 &&<li><div className='nav-link'><Link className='nav-link-text' to="/log-out">Log Out</Link></div></li>}
                 </ul>
             </nav>

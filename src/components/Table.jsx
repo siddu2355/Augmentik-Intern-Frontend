@@ -1,46 +1,53 @@
 import React, { Component } from "react";
+import { getMembers } from "../services/profileService";
 
-class Family extends Component {
+class Table extends Component {
   state = {
     members: [],
   };
 
 async componentDidMount() {
-  const {data:members} = await getMembers()
-  this.setState(members);
-};
+  const { data: members } = await getMembers()
+  this.setState({members:members});
+  };
+  
+  handleClick = () => {
+    window.print()
+  }
   render() {
-    const allMembers = this.state.members;
-    
-    
     return (
-      <div className="row">
-        <div className="col container" style={{fontSize:16}}>
-          <table className="table">
+      <div style={{ display: 'flex', flexDirection:"column", justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <div>
+          
+        </div>
+      <div style={{ width: '400px' }}>
+            <h2 style={{ color:"dodgerblue", marginLeft:"12rem" }}>ADMIN</h2>
+          <table style={{ border: '1px solid black', borderCollapse: 'collapse' }}>
             <thead>
               <tr style={{color:"#ffb500"}}>
-                <th>Name</th>
-                <th>age</th>
-                <th>Gender</th>
-                <th>Phone</th>
+                <th style={{ border: '1px solid black', padding: '5px' }}>Name</th>
+                <th style={{ border: '1px solid black', padding: '5px' }}>age</th>
+                <th style={{ border: '1px solid black', padding: '5px' }}>Gender</th>
+                <th style={{ border: '1px solid black', padding: '5px' }}>Phone</th>
                 <th />
               </tr>
             </thead>
             <tbody>
-              {allMembers.map(member => (
+              {this.state.members.map(member => (
                 <tr key={member._id}>
-                  <td>{member.name}</td>
-                  <td>{member.age}</td>
-                  <td>{member.gender}</td>
-                  <td>{member.phone}</td>
+                  <td style={{ border: '1px solid black', padding: '5px' }}>{member.name}</td>
+                  <td style={{ border: '1px solid black', padding: '5px' }}>{member.age}</td>
+                  <td style={{ border: '1px solid black', padding: '5px' }}>{member.gender}</td>
+                  <td style={{ border: '1px solid black', padding: '5px' }}>{member.phone}</td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </div>
+        <button className="btn--primary" style={{ width: '100px', marginLeft:"15rem" }} onClick={this.handleClick}>print</button>
+      </div>
       </div>
     );
   }
 }
 
-export default Family;
+export default Table;

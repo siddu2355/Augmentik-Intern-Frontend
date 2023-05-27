@@ -37,14 +37,12 @@ class Form extends Component {
         const errors = this.validate()
         this.setState({ errors:errors || {} })
         if (errors) return;
-        
-        // call server
         this.doSubmit()
     }
     renderButton(label, classN='lr-btn'){
         return <button className={classN} >{label}</button>
     }
-    renderInput(name, placeholder="", classy="input", type = "text") {
+    renderInput(name, placeholder="", classy="mera-input", type = "text") {
         const { data, errors } = this.state;
         
     return (
