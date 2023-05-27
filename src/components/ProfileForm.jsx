@@ -50,7 +50,6 @@ class ProfileForm extends Form {
         this.setState({ data: ans })
     }
     render() {
-        console.log(this.state.data)
         return (
                 <div className='lrbg'>
                 <div className="form-div">
